@@ -19,7 +19,7 @@ parch nsfw
 # Fetch specific wallpaper by ID
 parch id 12345
 
-# Use local wallpapers (offline mode)
+# Use local wallpapers
 parch local sfw
 parch local nsfw
 
@@ -29,7 +29,7 @@ parch sfw verbose
 
 ## Installation
 
-**From releases:** Download the latest binary from [releases](https://github.com/signalbean/Parch/releases/latest) and add to PATH.
+**From releases:** Download the latest binary from [releases](https://github.com/signalbean/Parch/releases/latest) and add to your PATH folders.
 
 **From source:**
 ```bash
@@ -38,13 +38,13 @@ cargo install parch
 
 ## Features
 
-- Cross-platform (Windows 10/11, Linux)
-- Online fetching from Konachan
+- Supports Windows 10/11 and Linux
+- Fetches directly from Konachan
 - Local wallpaper management
-- SFW/NSFW content filtering
+- Content filtering
 
 ## License
 
-MIT - see [LICENSE](LICENSE).
+MIT - [LICENSE](LICENSE).
 
 **Note:** Content sourced from Konachan. Use rating flags responsibly.
