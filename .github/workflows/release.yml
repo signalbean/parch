@@ -36,3 +36,4 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files: dist/parch${{ matrix.ext }}
+          generate_release_notes: true
