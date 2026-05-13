@@ -7,22 +7,22 @@ pub struct Args {
 pub fn parse() -> Result<Args, Box<dyn std::error::Error>> {
     let mut args = std::env::args().skip(1);
     let Some(first) = args.next() else {
-        return Err(format!("No arguments.\nTry '{} help'", env!("CARGO_PKG_NAME")).into());
+        return Err(format!("No arguments.\nTry '{} --help'", env!("CARGO_PKG_NAME")).into());
     };
 
     let mut config = ParseState::default();
 
     for arg in std::iter::once(first).chain(args) {
         match arg.as_str() {
-            "-h" | "help" => exit_with_help(),
-            "-v" | "version" => exit_with_version(),
+            "-h" | "--help" => exit_with_help(),
+            "-v" | "--version" => exit_with_version(),
 
-            "local" => config.local = true,
-            "-V" | "verbose" => config.verbose = true,
-            "id" => config.parse_id(&mut std::env::args())?,
+            "-l" | "--local" => config.local = true,
+            "-V" | "--verbose" => config.verbose = true,
+            "--id" => config.parse_id(&mut std::env::args())?,
             _ => {
                 return Err(
-                    format!("Unknown: {}\nTry '{} help'", arg, env!("CARGO_PKG_NAME")).into(),
+                    format!("Unknown: {}\nTry '{} --help'", arg, env!("CARGO_PKG_NAME")).into(),
                 );
             }
         }
@@ -73,7 +73,7 @@ fn exit_with_version() -> ! {
 
 fn print_help() {
     println!(
-        "{} v{}\nFetch and apply wallpapers from Konachan\n\nUSAGE:\n    {} [OPTIONS]\n\nOPTIONS:\n    \n    local                Use local images\n    \n    id <ID>              By post id\n    \n    -V, verbose          Verbose mode\n    \n    -h, help             Help menu\n    \n    -v, version          Version",
+        "{} v{}\nFetch and apply wallpapers from Konachan\n\nUSAGE:\n    {} [OPTIONS]\n\nOPTIONS:\n    \n    --local, -l          Use local images\n    \n    --id <ID>            By post id\n    \n    --verbose, -V        Verbose mode\n    \n    --help, -h           Help menu\n    \n    --version, -v        Version",
         env!("CARGO_PKG_NAME"),
         env!("CARGO_PKG_VERSION"),
         env!("CARGO_PKG_NAME")
