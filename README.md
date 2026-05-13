@@ -11,20 +11,16 @@
 
 ```bash
 # Fetch random SFW wallpaper
-parch sfw
-
-# Fetch random NSFW wallpaper  
-parch nsfw
+parch
 
 # Fetch specific wallpaper by ID
 parch id 12345
 
 # Use local wallpapers
-parch local sfw
-parch local nsfw
+parch local
 
 # Verbose output
-parch sfw verbose
+parch verbose
 ```
 
 ## Installation
@@ -41,10 +37,7 @@ cargo install parch
 - Supports Windows 10/11 and Linux
 - Fetches directly from Konachan
 - Local wallpaper management
-- Content filtering
 
 ## License
 
 MIT - [LICENSE](LICENSE).
-
-**Note:** Content sourced from Konachan. Use rating flags responsibly.
