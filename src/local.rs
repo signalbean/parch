@@ -4,8 +4,8 @@ use std::path::PathBuf;
 
 const IMAGE_EXTENSIONS: &[&str] = &["jpg", "jpeg", "png"];
 
-pub fn get_random(nsfw: bool, verbose: bool) -> Result<PathBuf, Box<dyn std::error::Error>> {
-    let dir = parch_dir(nsfw)?;
+pub fn get_random(verbose: bool) -> Result<PathBuf, Box<dyn std::error::Error>> {
+    let dir = parch_dir()?;
 
     if verbose {
         println!("→ Scanning directory: {}", dir.display());
@@ -18,11 +18,9 @@ pub fn get_random(nsfw: bool, verbose: bool) -> Result<PathBuf, Box<dyn std::err
     let images = collect_images(&dir)?;
 
     if images.is_empty() {
-        let category = if nsfw { "nsfw" } else { "sfw" };
         return Err(format!(
-            "No wallpapers found in {}. Download some first with 'parch {}'",
-            dir.display(),
-            category
+            "No wallpapers found in {}. Download some first with 'parch id <id>'",
+            dir.display()
         )
         .into());
     }

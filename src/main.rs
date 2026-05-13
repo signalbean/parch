@@ -18,11 +18,11 @@ fn run() -> Result<()> {
     let args = cli::parse()?;
 
     let path = if args.local {
-        local::get_random(args.nsfw, args.verbose)?
+        local::get_random(args.verbose)?
     } else {
-        let post = api::fetch(args.id, args.nsfw, args.verbose)?;
+        let post = api::fetch(args.id, args.verbose)?;
         let url = api::image_url(&post)?;
-        download::save(post.id, &url, post.rating == "e", args.verbose)?
+        download::save(post.id, &url, args.verbose)?
     };
 
     wallpaper::set(&path, args.verbose)?;

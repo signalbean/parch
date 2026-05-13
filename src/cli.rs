@@ -1,5 +1,4 @@
 pub struct Args {
-    pub nsfw: bool,
     pub id: Option<u64>,
     pub verbose: bool,
     pub local: bool,
@@ -17,8 +16,7 @@ pub fn parse() -> Result<Args, Box<dyn std::error::Error>> {
         match arg.as_str() {
             "-h" | "help" => exit_with_help(),
             "-v" | "version" => exit_with_version(),
-            "nsfw" => config.nsfw = true,
-            "sfw" => config.sfw = true,
+
             "local" => config.local = true,
             "-V" | "verbose" => config.verbose = true,
             "id" => config.parse_id(&mut std::env::args())?,
@@ -35,8 +33,6 @@ pub fn parse() -> Result<Args, Box<dyn std::error::Error>> {
 
 #[derive(Default)]
 struct ParseState {
-    nsfw: bool,
-    sfw: bool,
     id: Option<u64>,
     verbose: bool,
     local: bool,
@@ -50,18 +46,14 @@ impl ParseState {
     }
 
     fn validate(self) -> Result<Args, Box<dyn std::error::Error>> {
-        if self.nsfw && self.sfw {
-            return Err("Can't use nsfw and sfw together".into());
-        }
         if self.local && self.id.is_some() {
             return Err("Can't use local with id".into());
         }
-        if self.id.is_none() && !self.nsfw && !self.sfw {
-            return Err("Post ID or a type sfw/nsfw is required".into());
+        if self.id.is_none() && !self.local {
+            return Err("Post ID or local is required".into());
         }
 
         Ok(Args {
-            nsfw: self.nsfw,
             id: self.id,
             verbose: self.verbose,
             local: self.local,
@@ -81,14 +73,7 @@ fn exit_with_version() -> ! {
 
 fn print_help() {
     println!(
-        "{} v{}\nFetch and apply wallpapers from Konachan\n\nUSAGE:\n    {} [OPTIONS]\n\nOPTIONS:\
-    \n    sfw                  SFW images\
-    \n    nsfw                 NSFW images\
-    \n    local <TYPE>         Use local images\
-    \n    id <ID>              By post id\
-    \n    -V, verbose          Verbose mode\
-    \n    -h, help             Help menu\
-    \n    -v, version          Version",
+        "{} v{}\nFetch and apply wallpapers from Konachan\n\nUSAGE:\n    {} [OPTIONS]\n\nOPTIONS:\n    \n    local                Use local images\n    \n    id <ID>              By post id\n    \n    -V, verbose          Verbose mode\n    \n    -h, help             Help menu\n    \n    -v, version          Version",
         env!("CARGO_PKG_NAME"),
         env!("CARGO_PKG_VERSION"),
         env!("CARGO_PKG_NAME")

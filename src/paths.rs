@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-pub fn parch_dir(nsfw: bool) -> Result<PathBuf, String> {
+pub fn parch_dir() -> Result<PathBuf, String> {
     let mut path = if cfg!(windows) {
         PathBuf::from(
             std::env::var("USERPROFILE")
@@ -16,9 +16,6 @@ pub fn parch_dir(nsfw: bool) -> Result<PathBuf, String> {
 
     path.push("Pictures");
     path.push("Parch");
-    if nsfw {
-        path.push("Nsfw")
-    }
 
     Ok(path)
 }
