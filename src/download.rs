@@ -6,10 +6,9 @@ use std::path::PathBuf;
 pub fn save(
     id: u64,
     url: &str,
-    nsfw: bool,
     verbose: bool,
 ) -> Result<PathBuf, Box<dyn std::error::Error>> {
-    let dir = parch_dir(nsfw)?;
+    let dir = parch_dir()?;
     create_dir_all(&dir)?;
 
     let ext = extract_extension(url);

@@ -7,23 +7,18 @@ pub struct Post {
     pub id: u64,
     pub file_url: Option<String>,
     pub large_file_url: Option<String>,
-    pub rating: String,
 }
 
 pub fn fetch(
     id: Option<u64>,
-    nsfw: bool,
     verbose: bool,
 ) -> Result<Post, Box<dyn std::error::Error>> {
-    let url = build_url(id, nsfw);
+    let url = build_url(id);
 
     if verbose {
         match id {
             Some(i) => println!("→ Fetching post by ID {}", i),
-            None => println!(
-                "→ Fetching random {} post",
-                if nsfw { "explicit" } else { "safe" }
-            ),
+            None => println!("→ Fetching random post"),
         }
     }
 
@@ -44,16 +39,13 @@ pub fn image_url(post: &Post) -> Result<String, Box<dyn std::error::Error>> {
     Ok(normalize_url(url))
 }
 
-fn build_url(id: Option<u64>, nsfw: bool) -> String {
+fn build_url(id: Option<u64>) -> String {
     match id {
         Some(i) => format!("{}?tags=id%3A{}", BASE_URL, i),
-        None => {
-            let rating = if nsfw { "explicit" } else { "safe" };
-            format!(
-                "{}?tags=rating%3A{}%20order%3Arandom&limit=1",
-                BASE_URL, rating
-            )
-        }
+        None => format!(
+            "{}?tags=rating%3Asafe%20order%3Arandom&limit=1",
+            BASE_URL
+        ),
     }
 }
 
