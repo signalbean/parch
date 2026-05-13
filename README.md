@@ -10,7 +10,7 @@
 ## Usage
 
 ```bash
-# Fetch random SFW wallpaper
+# Fetch random wallpaper
 parch
 
 # Fetch specific wallpaper by ID
@@ -34,7 +34,7 @@ cargo install parch
 
 ## Features
 
-- Supports Windows 10/11 and Linux
+- Supports Windows 10/11 and Linux DE's KDE and Ubuntu and uses feh as a fallback on others
 - Fetches directly from Konachan
 - Local wallpaper management
 
