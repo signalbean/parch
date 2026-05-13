@@ -1,6 +1,6 @@
 [package]
 name = "parch"
-version = "0.6.5"
+version = "0.7.0"
 edition = "2024"
 authors = ["signalbean"]
 description = "CLI tool to fetch and apply wallpapers from Konachan"
