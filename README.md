@@ -10,17 +10,17 @@
 ## Usage
 
 ```bash
-# Fetch random wallpaper
+# Fetch random SFW wallpaper
 parch
 
 # Fetch specific wallpaper by ID
-parch id 12345
+parch --id 12345
 
 # Use local wallpapers
-parch local
+parch --local
 
 # Verbose output
-parch verbose
+parch --verbose
 ```
 
 ## Installation
