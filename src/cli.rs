@@ -4,10 +4,12 @@ pub struct Args {
     pub local: bool,
 }
 
+const PKG_NAME: &str = env!("CARGO_PKG_NAME");
+
 pub fn parse() -> Result<Args, Box<dyn std::error::Error>> {
     let mut args = std::env::args().skip(1);
     let Some(first) = args.next() else {
-        return Err(format!("No arguments.\nTry '{} --help'", env!("CARGO_PKG_NAME")).into());
+        return Err(format!("No arguments.\nTry '{} --help'", PKG_NAME).into());
     };
 
     let mut config = ParseState::default();
@@ -21,9 +23,7 @@ pub fn parse() -> Result<Args, Box<dyn std::error::Error>> {
             "-V" | "--verbose" => config.verbose = true,
             "--id" => config.parse_id(&mut std::env::args())?,
             _ => {
-                return Err(
-                    format!("Unknown: {}\nTry '{} --help'", arg, env!("CARGO_PKG_NAME")).into(),
-                );
+                return Err(format!("Unknown: {}\nTry '{} --help'", arg, PKG_NAME).into());
             }
         }
     }
@@ -67,15 +67,15 @@ fn exit_with_help() -> ! {
 }
 
 fn exit_with_version() -> ! {
-    println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
+    println!("{} {}", PKG_NAME, env!("CARGO_PKG_VERSION"));
     std::process::exit(0)
 }
 
 fn print_help() {
     println!(
         "{} v{}\nFetch and apply wallpapers from Konachan\n\nUSAGE:\n    {} [OPTIONS]\n\nOPTIONS:\n    \n    --local, -l          Use local images\n    \n    --id <ID>            By post id\n    \n    --verbose, -V        Verbose mode\n    \n    --help, -h           Help menu\n    \n    --version, -v        Version",
-        env!("CARGO_PKG_NAME"),
+        PKG_NAME,
         env!("CARGO_PKG_VERSION"),
-        env!("CARGO_PKG_NAME")
+        PKG_NAME
     );
 }

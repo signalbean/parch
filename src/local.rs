@@ -1,6 +1,6 @@
 use crate::paths::parch_dir;
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 const IMAGE_EXTENSIONS: &[&str] = &["jpg", "jpeg", "png"];
 
@@ -38,7 +38,7 @@ pub fn get_random(verbose: bool) -> Result<PathBuf, Box<dyn std::error::Error>> 
     Ok(selected)
 }
 
-fn collect_images(dir: &PathBuf) -> Result<Vec<PathBuf>, Box<dyn std::error::Error>> {
+fn collect_images(dir: &Path) -> Result<Vec<PathBuf>, Box<dyn std::error::Error>> {
     let mut images = Vec::new();
 
     for entry in fs::read_dir(dir)? {
