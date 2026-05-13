@@ -16,7 +16,7 @@ pub fn parse() -> Result<Args, Box<dyn std::error::Error>> {
         match arg.as_str() {
             "-h" | "help" => exit_with_help(),
             "-v" | "version" => exit_with_version(),
-            
+
             "local" => config.local = true,
             "-V" | "verbose" => config.verbose = true,
             "id" => config.parse_id(&mut std::env::args())?,

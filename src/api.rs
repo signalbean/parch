@@ -9,10 +9,7 @@ pub struct Post {
     pub large_file_url: Option<String>,
 }
 
-pub fn fetch(
-    id: Option<u64>,
-    verbose: bool,
-) -> Result<Post, Box<dyn std::error::Error>> {
+pub fn fetch(id: Option<u64>, verbose: bool) -> Result<Post, Box<dyn std::error::Error>> {
     let url = build_url(id);
 
     if verbose {
@@ -42,10 +39,7 @@ pub fn image_url(post: &Post) -> Result<String, Box<dyn std::error::Error>> {
 fn build_url(id: Option<u64>) -> String {
     match id {
         Some(i) => format!("{}?tags=id%3A{}", BASE_URL, i),
-        None => format!(
-            "{}?tags=rating%3Asafe%20order%3Arandom&limit=1",
-            BASE_URL
-        ),
+        None => format!("{}?tags=rating%3Asafe%20order%3Arandom&limit=1", BASE_URL),
     }
 }
 

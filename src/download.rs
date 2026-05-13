@@ -3,11 +3,7 @@ use std::fs::{File, create_dir_all};
 use std::io::copy;
 use std::path::PathBuf;
 
-pub fn save(
-    id: u64,
-    url: &str,
-    verbose: bool,
-) -> Result<PathBuf, Box<dyn std::error::Error>> {
+pub fn save(id: u64, url: &str, verbose: bool) -> Result<PathBuf, Box<dyn std::error::Error>> {
     let dir = parch_dir()?;
     create_dir_all(&dir)?;
 
