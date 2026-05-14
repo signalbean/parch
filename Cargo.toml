@@ -1,13 +1,13 @@
 [package]
 name = "parch"
-version = "0.7.0"
+version = "0.8.0"
 edition = "2024"
 authors = ["signalbean"]
 description = "CLI tool to fetch and apply wallpapers from Konachan"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/signalbean/Parch"
 readme = "README.md"
-keywords = ["wallpaper", "image", "customization", "cli"]
+keywords = ["wallpaper", "image", "customization", "cli", "konachan"]
 
 [[bin]]
 name = "parch"
